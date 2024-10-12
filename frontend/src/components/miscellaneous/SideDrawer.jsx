@@ -1,30 +1,30 @@
-import { Button } from "@chakra-ui/button";
+import { Button } from "@chakra-ui/react";
 import { useDisclosure } from "@chakra-ui/hooks";
-import { Input } from "@chakra-ui/input";
-import { Box, Text } from "@chakra-ui/layout";
+import { Input } from "@chakra-ui/react";
+import { Box, Text } from "@chakra-ui/react";
 import {
   Menu,
   MenuButton,
   MenuDivider,
   MenuItem,
   MenuList,
-} from "@chakra-ui/menu";
+} from "@chakra-ui/react";
 import {
   Drawer,
   DrawerBody,
   DrawerContent,
   DrawerHeader,
   DrawerOverlay,
-} from "@chakra-ui/modal";
-import { Tooltip } from "@chakra-ui/tooltip";
+} from "@chakra-ui/react";
+import { Tooltip } from "@chakra-ui/react";
 import { BellIcon, ChevronDownIcon } from "@chakra-ui/icons";
-import { Avatar } from "@chakra-ui/avatar";
-import { useHistory } from "react-router-dom";
+import { Avatar } from "@chakra-ui/react";
+import { useNavigate } from "react-router-dom";
 import { useState } from "react";
-import axios from "axios";
-import { useToast } from "@chakra-ui/toast";
+import axios from "../../http";
+import { useToast } from "@chakra-ui/react";
 import ChatLoading from "../ChatLoading";
-import { Spinner } from "@chakra-ui/spinner";
+import { Spinner } from "@chakra-ui/react";
 import ProfileModal from "./ProfileModal";
 import NotificationBadge from "react-notification-badge";
 import { Effect } from "react-notification-badge";
@@ -49,11 +49,11 @@ function SideDrawer() {
 
   const toast = useToast();
   const { isOpen, onOpen, onClose } = useDisclosure();
-  const history = useHistory();
+  const history = useNavigate();
 
   const logoutHandler = () => {
     localStorage.removeItem("userInfo");
-    history.push("/");
+    history("/");
   };
 
   const handleSearch = async () => {
@@ -125,7 +125,7 @@ function SideDrawer() {
   return (
     <>
       <Box
-        d="flex"
+        display="flex"
         justifyContent="space-between"
         alignItems="center"
         bg="light blue"
@@ -136,7 +136,7 @@ function SideDrawer() {
         <Tooltip label="Search Users to chat" hasArrow placement="bottom-end">
           <Button variant="ghost" onClick={onOpen}>
             <i className="fas fa-search"></i>
-            <Text d={{ base: "none", md: "flex" }} px={4}>
+            <Text display={{ base: "none", md: "flex" }} px={4}>
               Search User
             </Text>
           </Button>
@@ -195,7 +195,7 @@ function SideDrawer() {
         <DrawerContent>
           <DrawerHeader borderBottomWidth="1px">Search Users</DrawerHeader>
           <DrawerBody>
-            <Box d="flex" pb={2}>
+            <Box display="flex" pb={2}>
               <Input
                 placeholder="Search by name or email"
                 mr={2}
@@ -215,7 +215,7 @@ function SideDrawer() {
                 />
               ))
             )}
-            {loadingChat && <Spinner ml="auto" d="flex" />}
+            {loadingChat && <Spinner ml="auto" display="flex" />}
           </DrawerBody>
         </DrawerContent>
       </Drawer>
